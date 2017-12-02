@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour {
             StartCoroutine(Reload());
             return;
         }
-        else if(Input.GetAxis(os+"Fire")==1) {
+        else if((Input.GetAxis(os+"Fire")==1&&controltype==Controltype.Gamepad)||(Input.GetButton(os + "Fire") && controltype == Controltype.Mouse)) {
             if (currentGun.CurrentAmmo == 0) {
                 StartCoroutine(Reload());
                 return;
