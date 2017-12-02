@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
         UpdateControls();
         storedGuns = new Queue<Gun>();
         storedGuns.Enqueue(Gun.pistol);
+        storedGuns.Enqueue(Gun.smg);
         SwitchGun();
         switch(SystemInfo.operatingSystemFamily) {
             case OperatingSystemFamily.Windows:
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour {
         timeToFire = 1 / currentGun.FireRate;
         ammo.maxValue = currentGun.MaxAmmo;
         ammo.value = currentGun.CurrentAmmo;
-        ammoText.text = "AMMO: " + currentGun.CurrentAmmo + " / " + currentGun.MaxAmmo;
+        ammoText.text = "AMMO: " + (int)(currentGun.CurrentAmmo / 10) + currentGun.CurrentAmmo % 10 + " / " + currentGun.MaxAmmo;
     }
 
     bool reloading;
@@ -85,27 +86,28 @@ public class PlayerController : MonoBehaviour {
         if(Input.GetButtonDown(os+"Switch")) {
             if (reloading) {
                 reloading = false;
-                StopCoroutine(Reload());
+                StopAllCoroutines();
             }
+            SwitchGun();
         }
-        if (reloading)
+        else if (reloading)
             return;
-        if(Input.GetButtonDown(os+"Reload")) {
+        else if(Input.GetButtonDown(os+"Reload")) {
             StartCoroutine(Reload());
             return;
         }
-        if(Input.GetButton(os+"Fire")) {
+        else if(Input.GetButton(os+"Fire")) {
             if (currentGun.CurrentAmmo == 0) {
                 StartCoroutine(Reload());
                 return;
             }
             else if (timeToFire < 0) {
-                Instantiate(bullet,transform.position,Quaternion.identity).GetComponent<BulletController>().Init(20, transform.up);
+                Instantiate(bullet,transform.position+(transform.up),Quaternion.identity).GetComponent<BulletController>().Init(20, transform.up,currentGun.Dmg);
 
                 currentGun.Fire();
                 timeToFire = 1 / currentGun.FireRate;
                 ammo.value = currentGun.CurrentAmmo;
-                ammoText.text = "AMMO: " + currentGun.CurrentAmmo + " / " + currentGun.MaxAmmo;
+                ammoText.text = "AMMO: " + (int)(currentGun.CurrentAmmo / 10) + currentGun.CurrentAmmo % 10 + " / " + currentGun.MaxAmmo;
             }
         }
     }
@@ -121,7 +123,7 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(1.5f);
         ammo.value = currentGun.MaxAmmo;
         currentGun.Reload();
-        ammoText.text = "AMMO: " + currentGun.CurrentAmmo + " / " + currentGun.MaxAmmo;
+        ammoText.text = "AMMO: " + (int)(currentGun.CurrentAmmo / 10) + currentGun.CurrentAmmo % 10 + " / " + currentGun.MaxAmmo;
         reloading = false;
     }
 

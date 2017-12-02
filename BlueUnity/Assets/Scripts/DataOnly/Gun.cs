@@ -25,10 +25,14 @@ public class Gun {
         currentAmmo = this.maxAmmo = maxAmmo;
     }
 
-    public static Gun pistol = new Gun(2, 10, 10, 5);
+
+    //  GUNS
+
+    public static Gun pistol = new Gun(2, 13, 10, 10);
+    public static Gun smg = new Gun(10, 4, 15, 20);
 
 
-    // Atributes
+    //  ATRIBUTES
 
     public float FireRate {
         get {
