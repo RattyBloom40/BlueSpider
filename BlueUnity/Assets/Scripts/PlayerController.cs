@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour {
     public float speed;
     public GameObject targeter;
+    public AudioSource Shoot;
 
     public enum Controltype {Gamepad, Mouse}
 
@@ -104,6 +105,7 @@ public class PlayerController : MonoBehaviour {
             else if (timeToFire < 0) {
                 Instantiate(bullet,transform.position+(transform.up),Quaternion.identity).GetComponent<BulletController>().Init(20, transform.up,currentGun.Dmg);
 
+                Shoot.Play();
                 currentGun.Fire();
                 timeToFire = 1 / currentGun.FireRate;
                 ammo.value = currentGun.CurrentAmmo;
