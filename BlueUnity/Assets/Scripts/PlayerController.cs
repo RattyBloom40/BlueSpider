@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void UpdateControls() {
-        controlMulti = controltype == Controltype.Mouse ? .5f : 10;
+        controlMulti = .5f;
     }
 
     void Update () {
