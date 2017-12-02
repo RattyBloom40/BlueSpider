@@ -40,6 +40,5 @@ public class PlayerController : MonoBehaviour {
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180 - (Mathf.Rad2Deg * (Mathf.Asin(position_two.x / position_two.magnitude)))));
         }
-
     }
 }

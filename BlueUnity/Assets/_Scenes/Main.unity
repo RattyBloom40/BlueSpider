@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 400526026}
   - component: {fileID: 400526027}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Bottom Half
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 859439500}
   - component: {fileID: 859439501}
   m_Layer: 0
-  m_Name: Graphics
+  m_Name: Top Half
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   targeter: {fileID: 1903015101}
-  controltype: 1
+  controltype: 0
 --- !u!1 &1903015101
 GameObject:
   m_ObjectHideFlags: 0
