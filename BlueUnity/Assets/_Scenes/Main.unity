@@ -812,6 +812,7 @@ MonoBehaviour:
   ammo: {fileID: 751499188}
   ammoText: {fileID: 1787184698}
   bullet: {fileID: 1829804945855740, guid: f031c55ecabba4f058e5a7d9b0b4794e, type: 2}
+  eventSystem: {fileID: 473330814}
 --- !u!1 &1679607938
 GameObject:
   m_ObjectHideFlags: 0

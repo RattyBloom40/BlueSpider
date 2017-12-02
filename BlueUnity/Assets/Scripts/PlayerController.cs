@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour {
@@ -9,15 +10,18 @@ public class PlayerController : MonoBehaviour {
     public GameObject targeter;
 
     public enum Controltype {Gamepad, Mouse}
+
     public Gun currentGun;
     public Queue<Gun> storedGuns;
 
     public Controltype controltype = Controltype.Mouse;
     float controlMulti;
+    string os;
 
     Rigidbody2D rb;
 	
     void Start (){
+        
         rb = GetComponent<Rigidbody2D>();
         Cursor.visible = false;
         //TODO: Finish control mode code
@@ -26,6 +30,19 @@ public class PlayerController : MonoBehaviour {
         storedGuns = new Queue<Gun>();
         storedGuns.Enqueue(Gun.pistol);
         SwitchGun();
+        switch(SystemInfo.operatingSystemFamily) {
+            case OperatingSystemFamily.Windows:
+                os = "Windows_";
+                break;
+            case OperatingSystemFamily.MacOSX:
+                os = "MacOSX_";
+                break;
+            case OperatingSystemFamily.Linux:
+                os = "Windows_";
+                break;
+        }
+        eventSystem.GetComponent<StandaloneInputModule>().submitButton = os+"Submit";
+        eventSystem.GetComponent<StandaloneInputModule>().cancelButton = os + "Pause";
     }
 
     public void UpdateControls() {
@@ -49,7 +66,7 @@ public class PlayerController : MonoBehaviour {
     void Update () {
         //  MOVEMENT
         rb.velocity = (Vector2.up*speed*Input.GetAxis("Vertical"))+(Vector2.right*speed*Input.GetAxis("Horizontal"));
-        targeter.transform.Translate(controlMulti*new Vector3(Input.GetAxis("Mouse X"),Input.GetAxis("Mouse Y")));
+        targeter.transform.Translate(controlMulti*new Vector3(Input.GetAxis(os+"Mouse X"),Input.GetAxis(os+"Mouse Y")));
         Vector3 position_two = targeter.transform.position;
         Vector3 movement_vector = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
         position_two = transform.position - position_two;
@@ -65,7 +82,7 @@ public class PlayerController : MonoBehaviour {
         //  GUNS
         timeToFire -= Time.deltaTime;
 
-        if(Input.GetButtonDown("Switch")) {
+        if(Input.GetButtonDown(os+"Switch")) {
             if (reloading) {
                 reloading = false;
                 StopCoroutine(Reload());
@@ -73,11 +90,11 @@ public class PlayerController : MonoBehaviour {
         }
         if (reloading)
             return;
-        if(Input.GetButtonDown("Reload")) {
+        if(Input.GetButtonDown(os+"Reload")) {
             StartCoroutine(Reload());
             return;
         }
-        if(Input.GetButton("Fire")) {
+        if(Input.GetButton(os+"Fire")) {
             if (currentGun.CurrentAmmo == 0) {
                 StartCoroutine(Reload());
                 return;
@@ -107,4 +124,6 @@ public class PlayerController : MonoBehaviour {
         ammoText.text = "AMMO: " + currentGun.CurrentAmmo + " / " + currentGun.MaxAmmo;
         reloading = false;
     }
+
+    public EventSystem eventSystem;
 }
