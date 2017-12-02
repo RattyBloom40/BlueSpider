@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour {
             StartCoroutine(Reload());
             return;
         }
-        else if(Input.GetButton(os+"Fire")) {
+        else if(Input.GetAxis(os+"Fire")==1) {
             if (currentGun.CurrentAmmo == 0) {
                 StartCoroutine(Reload());
                 return;
