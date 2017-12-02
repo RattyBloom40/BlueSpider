@@ -26,5 +26,6 @@ public class BulletController : MonoBehaviour {
         if(other.GetComponent<HealthSystem>()!=null) {
             other.GetComponent<HealthSystem>().health-=dmg;
         }
+        Destroy(gameObject);
     }
 }

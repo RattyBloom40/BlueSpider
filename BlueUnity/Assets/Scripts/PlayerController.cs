@@ -94,10 +94,11 @@ public class PlayerController : MonoBehaviour {
         else if (reloading)
             return;
         else if(Input.GetButtonDown(os+"Reload")) {
-            StartCoroutine(Reload());
+            if(currentGun.CurrentAmmo<currentGun.MaxAmmo)
+                StartCoroutine(Reload());
             return;
         }
-        else if((Input.GetAxis(os+"Fire")==1&&controltype==Controltype.Gamepad)||(Input.GetButton(os + "Fire") && controltype == Controltype.Mouse)) {
+        else if(Input.GetAxis(os+"Fire")==1||Input.GetButton(os + "Fire")) {
             if (currentGun.CurrentAmmo == 0) {
                 StartCoroutine(Reload());
                 return;
