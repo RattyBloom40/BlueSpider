@@ -810,6 +810,7 @@ MonoBehaviour:
   targeter: {fileID: 1903015101}
   controltype: 0
   ammo: {fileID: 751499188}
+  ammoText: {fileID: 1787184698}
   bullet: {fileID: 1829804945855740, guid: f031c55ecabba4f058e5a7d9b0b4794e, type: 2}
 --- !u!1 &1679607938
 GameObject:
@@ -952,7 +953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.74264705, g: 0.74264705, b: 0.74264705, a: 1}
+  m_Color: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

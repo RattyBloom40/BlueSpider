@@ -5,15 +5,11 @@ using UnityEngine;
 public class BulletController : MonoBehaviour {
     float speed;
     Vector3 dir;
-
-    bool init = false;
-
     float falloff = 0;
 
     public void Init(float s, Vector3 d) {
         speed = s;
         dir = d;
-        init = true;
         Debug.Log(dir);
     }
 

@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour {
         timeToFire = 1 / currentGun.FireRate;
         ammo.maxValue = currentGun.MaxAmmo;
         ammo.value = currentGun.CurrentAmmo;
+        ammoText.text = "AMMO: " + currentGun.CurrentAmmo + " / " + currentGun.MaxAmmo;
     }
 
     bool reloading;
@@ -77,7 +78,6 @@ public class PlayerController : MonoBehaviour {
             return;
         }
         if(Input.GetButton("Fire")) {
-            ammo.value = currentGun.CurrentAmmo;
             if (currentGun.CurrentAmmo == 0) {
                 StartCoroutine(Reload());
                 return;
@@ -87,19 +87,24 @@ public class PlayerController : MonoBehaviour {
 
                 currentGun.Fire();
                 timeToFire = 1 / currentGun.FireRate;
+                ammo.value = currentGun.CurrentAmmo;
+                ammoText.text = "AMMO: " + currentGun.CurrentAmmo + " / " + currentGun.MaxAmmo;
             }
         }
     }
 
     public Slider ammo;
+    public Text ammoText;
     public GameObject bullet;
 
     IEnumerator Reload() {
         reloading = true;
+        ammoText.text = "RELOADING";
         Debug.Log("reloading");
         yield return new WaitForSeconds(1.5f);
         ammo.value = currentGun.MaxAmmo;
         currentGun.Reload();
+        ammoText.text = "AMMO: " + currentGun.CurrentAmmo + " / " + currentGun.MaxAmmo;
         reloading = false;
     }
 }
