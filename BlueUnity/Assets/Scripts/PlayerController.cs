@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 position_two = targeter.transform.position;
         position_two = revolver.transform.position - position_two;
 
-        if (position_two.y < 0)
+       /* if (position_two.y < 0) I commented this out because I figured that the player sprite didn't need to rotate, but idk how to animate or swap between right and left
         {
             revolver.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90+(Mathf.Rad2Deg * (Mathf.Asin(position_two.x / position_two.magnitude)))));
         }
