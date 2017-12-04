@@ -28,8 +28,8 @@ public class Gun {
 
     //  GUNS
 
-    public static Gun pistol = new Gun(2, 13, 6, 10);
-    public static Gun smg = new Gun(10, 4, 7, 20);
+    public static Gun pistol = new Gun(2, 13, 7.5f, 10);
+    public static Gun smg = new Gun(10, 4, 7.5f, 20);
 
 
     //  ATRIBUTES

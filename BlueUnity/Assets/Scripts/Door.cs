@@ -8,8 +8,8 @@ public class Door : MonoBehaviour {
     Room room;
     bool open = false;
 
-    void OnTriggerEnter2D() {
-        if (open)
+    void OnTriggerEnter2D(Collider2D other) {
+        if (open && other.CompareTag("Player"))
             room.Next();
     }
 

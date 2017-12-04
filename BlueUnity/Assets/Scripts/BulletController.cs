@@ -23,7 +23,7 @@ public class BulletController : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if(other.GetComponent<HealthSystem>()!=null) {
+        if(other.GetComponent<Enemy>()!=null) {
             other.GetComponent<HealthSystem>().health-=dmg;
         }
         Destroy(gameObject);
