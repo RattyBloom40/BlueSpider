@@ -73,14 +73,15 @@ public class PlayerController : MonoBehaviour {
         Vector3 movement_vector = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
         position_two = transform.position - position_two;
 
-        if (position_two.y < 0)
+       /* if (position_two.y < 0) I commented this out because I figured that the player sprite didn't need to rotate, but idk how to animate or swap between right and left
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Rad2Deg * (Mathf.Asin(position_two.x / position_two.magnitude))));
         }
         else
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180 - (Mathf.Rad2Deg * (Mathf.Asin(position_two.x / position_two.magnitude)))));
-        }
+        }*/
+
         //  GUNS
         timeToFire -= Time.deltaTime;
 
