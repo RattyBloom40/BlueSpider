@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: e40e64b7c068b4d95810a95ceacf17ee
-timeCreated: 1512393317
+guid: c2ceaeaa764854a69b7fe2a005ed39d3
+timeCreated: 1512392022
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: revolver_0
-    21300002: revolver_1
-    21300004: revolver_2
-    21300006: revolver_3
-    21300008: revolver_4
+    21300000: player left_0
+    21300002: player left_1
+    21300004: player left_2
+    21300006: player left_3
+    21300008: player left_4
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -112,7 +112,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: revolver_0
+      name: player left_0
       rect:
         serializedVersion: 2
         x: 0
@@ -126,7 +126,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: revolver_1
+      name: player left_1
       rect:
         serializedVersion: 2
         x: 16
@@ -140,7 +140,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: revolver_2
+      name: player left_2
       rect:
         serializedVersion: 2
         x: 32
@@ -154,7 +154,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: revolver_3
+      name: player left_3
       rect:
         serializedVersion: 2
         x: 48
@@ -168,7 +168,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: revolver_4
+      name: player left_4
       rect:
         serializedVersion: 2
         x: 64

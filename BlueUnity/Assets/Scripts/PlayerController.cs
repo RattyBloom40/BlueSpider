@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour {
     public GameObject targeter;
     public AudioSource Shoot;
 
+    public GameObject revolver;
+    public Animator anim;
+
     public enum Controltype {Gamepad, Mouse}
 
     public Gun currentGun;
@@ -53,6 +56,8 @@ public class PlayerController : MonoBehaviour {
 
     float timeToFire;
 
+    public Slider Health;
+
     public void SwitchGun() {
         if(currentGun!=null)
             storedGuns.Enqueue(currentGun);
@@ -66,21 +71,25 @@ public class PlayerController : MonoBehaviour {
     bool reloading;
 
     void Update () {
+        Health.value = GetComponent<HealthSystem>().health;
+
         //  MOVEMENT
+        anim.SetBool("Left", Input.GetAxis("Horizontal") < 0);
         rb.velocity = (Vector2.up*speed*Input.GetAxis("Vertical"))+(Vector2.right*speed*Input.GetAxis("Horizontal"));
+        anim.SetFloat("Speed", Mathf.Abs(rb.velocity.magnitude / speed));
         targeter.transform.Translate(controlMulti*new Vector3(Input.GetAxis(os+"Mouse X"),Input.GetAxis(os+"Mouse Y")));
         Vector3 position_two = targeter.transform.position;
-        Vector3 movement_vector = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
-        position_two = transform.position - position_two;
+        position_two = revolver.transform.position - position_two;
 
         if (position_two.y < 0)
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Rad2Deg * (Mathf.Asin(position_two.x / position_two.magnitude))));
+            revolver.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90+(Mathf.Rad2Deg * (Mathf.Asin(position_two.x / position_two.magnitude)))));
         }
         else
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180 - (Mathf.Rad2Deg * (Mathf.Asin(position_two.x / position_two.magnitude)))));
+            revolver.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90+(180 - (Mathf.Rad2Deg * (Mathf.Asin(position_two.x / position_two.magnitude))))));
         }
+        revolver.GetComponent<SpriteRenderer>().flipY = (targeter.transform.position.x > transform.position.x);
         //  GUNS
         timeToFire -= Time.deltaTime;
 
@@ -104,7 +113,7 @@ public class PlayerController : MonoBehaviour {
                 return;
             }
             else if (timeToFire < 0) {
-                Instantiate(bullet,transform.position+(transform.up),Quaternion.identity).GetComponent<BulletController>().Init(20, transform.up,currentGun.Dmg);
+                Instantiate(bullet,transform.position+(-1*revolver.transform.right),Quaternion.identity).GetComponent<BulletController>().Init(20, -1*revolver.transform.right,currentGun.Dmg);
 
                 Shoot.Play();
                 currentGun.Fire();
